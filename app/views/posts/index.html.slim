@@ -1,0 +1,105 @@
+h1 History of list making in rails
+
+ol
+  li
+    h3 standard
+
+    pre
+      |
+        ul
+          - @posts.each do |post|
+            li
+              span.id \#{post.id}: 
+              span.title= post.title
+    
+    ul
+      - @posts.each do |post|
+        li
+          span.id #{post.id}: 
+          span.title= post.title
+
+  li
+    h3 div_for
+    
+    pre
+      |
+        ul
+          - @posts.each do |post|
+            = div_for post, class: 'li'
+              span.id \#{post.id}: 
+              span.title= post.title
+    
+    ul
+      - @posts.each do |post|
+        = div_for post, class: 'li'
+          span.id #{post.id}: 
+          span.title= post.title
+  li
+    h3 content_tag_for
+    pre
+      |
+        ul
+          - @posts.each do |post|
+            = content_tag_for :li, post
+              span.id \#{post.id}: 
+              span.title= post.title
+    
+    ul
+      - @posts.each do |post|
+        = content_tag_for :li, post
+          span.id #{post.id}: 
+          span.title= post.title
+  li
+    h3 li_for
+    
+    pre
+      |
+        ul
+          = li_for @posts do |post|
+            span.id \#{post.id}: 
+            span.title= post.title
+    
+    ul
+      = li_for @posts do |post|
+        span.id #{post.id}: 
+        span.title= post.title
+    
+  li
+    h3 li_for with partial
+    
+    pre
+      |
+        ul
+          = li_for @posts do |post|
+            = render 'post', post: post
+    
+    ul
+      = li_for @posts do |post|
+        = render 'post', post: post
+    
+  li
+    h3 render_li_for
+    
+    pre
+      |
+        ul= render_li_for @posts
+    
+    ul= render_li_for @posts
+    
+  li
+    h3 render_li_for with custom partial
+    
+    pre
+      |
+        ul= render_li_for @posts, { partial: 'small_post' } 
+    
+    ul= render_li_for @posts, { partial: 'small_post' } 
+    
+  li
+    h3 render_content_for
+    
+    pre
+      |
+        ul= render_content_for :li, @posts
+    
+    ul= render_content_for :li, @posts
